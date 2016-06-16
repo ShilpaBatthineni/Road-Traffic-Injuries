@@ -1,0 +1,7 @@
+c<-table(rtia$Accident_Severity)
+1      2      3 
+7243  84099 524422 
+c1 <- round(c/sum(c) * 100, 1)
+c1 <- paste(car_labels, "%", sep="")
+pie(c, main="Severity", col=colors, labels=c1,cex=0.8)
+>legend(1.5, 0.8, c("Nonfatal","Fatal","Killed"), cex=0.8, fill=colors)
