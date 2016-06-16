@@ -1,0 +1,45 @@
+ a <- table(rtia$Mode, rtia$Accident_Severity)
+ a
+            
+                  1      2      3
+  All modes    1992  22676 142155
+  Bicyclist     398   4447  28177
+  Bus            30    377   2163
+  Car/Pickup   1549  18044 112498
+  Motorcycle    717   8141  50246
+  ND             22    180   1181
+  Pedestrian    721   8728  54071
+  Truck         135   1698  10429
+  Vehicles     1679  19808 123502
+
+
+
+ barplot(a, main="mode and Severity", xlab="Severity", col=c("darkblue","red","green"),legend = rownames(a), beside=TRUE, names.arg = c("All modes", "Bicyclist", "Bus", "Car/Pickup", "Motorcycle","ND", "Pedestrian","Truck","Vehicles"),args.legend = list(title = "Severity", x = "topleft", cex = .7))
+----------------------------
+
+
+library(lubridate)
+month(road.csv$Date)
+a <- table(month(road.csv$Date),road.csv$Accident_Severity)
+max(a)
+barplot(counts, main="months and Severity",xlab="month(road.csv$Date)", col=c("darkblue","red"),legend = rownames(counts), beside=TRUE)
+---------------------------
+
+a <- table(rti$Day_of_Week, rti$Accident_Severity)
+
+------------------
+time=format(as.POSIXct(rti$Time, format=" %H"), format="%H")
+a <- table(time)
+a <- table(time,rti$Accident_Severity)
+barplot(a, main="Hours and Severity",xlab="Severity",names.arg = c("Non-Fatal", " Fatal" , " Killed") col=c("darkblue","red"),legend = rownames(a), beside=TRUE)
+
+
+
+---------------------------------
+
+coords <- cbind(Longitude = as.numeric(as.character(rtia$Longitude)), Latitude = as.numeric(as.character(rtia$Latitude)))
+
+revgeocode(c(rtia$Longitude[1], rtia$Latitude[1]))
+map <- qmap('London', zoom = 12, maptype = 'hybrid')
+map + geom_point(data = rtia, aes(x = Longitude, y = Latitude), color="red", size=3, alpha=0.5)
+points(rtia$Longitude, rtia$Latitude, col = "red", cex = .6)
